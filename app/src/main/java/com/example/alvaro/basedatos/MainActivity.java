@@ -42,10 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnBuscar:
                 Intent intent = new Intent (this, ResultadosActivity.class);
+                intent.putExtra("id", id.getText().toString());
                 intent.putExtra("nombre", nombre.getText().toString());
+                intent.putExtra("apellido", apellido.getText().toString());
                 startActivity(intent);
 
-                SQLiteDatabase db = helper.getReadableDatabase();
+                /*SQLiteDatabase db = helper.getReadableDatabase();
 
                 // Define a projection that specifies which columns from the database
                 // you will actually use after this query.
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(this, itemId, Toast.LENGTH_LONG).show();
                     nombre.setText(c.getString(0));
                     apellido.setText(c.getString(1));
-                }
+                }*/
                 break;
             case R.id.btnInsertar:
                 // Gets the data repository in write mode

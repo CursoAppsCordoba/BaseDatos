@@ -14,9 +14,9 @@ public class Estructura_BBDD {
     /* Inner class that defines the table contents */
     //public static class FeedEntry implements BaseColumns {
         public static final String TABLE_NAME = "datosPersonales";
-        public static final String COLUMN_NAME_ID = "Id";
-        public static final String COLUMN_NAME_NOMBRE = "Nombre";
-        public static final String COLUMN_NAME_APELLIDO = "Apellido";
+        public static final String COLUMN_NAME_ID = "_id";
+        public static final String COLUMN_NAME_NOMBRE = "nombre";
+        public static final String COLUMN_NAME_APELLIDO = "apellido";
     //}
 
     private static final String TEXT_TYPE = " TEXT";

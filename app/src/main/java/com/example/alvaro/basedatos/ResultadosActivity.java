@@ -18,24 +18,27 @@ public class ResultadosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resultados);
 
         Intent intent = getIntent();
-        if (intent.hasExtra("nombre")) {
-            String nombre = intent.getStringExtra("nombre");
+        if (intent.hasExtra("id") && intent.hasExtra("nombre") && intent.hasExtra("apellido")) {
+            String id = "%"+ intent.getStringExtra("id") +"%";
+            String nombre = "%" + intent.getStringExtra("nombre") + "%";
+            String apellido = "%" + intent.getStringExtra("apellido") + "%";
+
 
             SQLiteDatabase db = helper.getReadableDatabase();
 
-            // Define a projection that specifies which columns from the database
-            // you will actually use after this query.
             String[] projection = {
-                    //Estructura_BBDD.COLUMN_NAME_ID,
+                    Estructura_BBDD.COLUMN_NAME_ID,
                     Estructura_BBDD.COLUMN_NAME_NOMBRE,
                     Estructura_BBDD.COLUMN_NAME_APELLIDO
             };
 
-            // Filter results WHERE "title" = 'My Title'
-            String selection = Estructura_BBDD.COLUMN_NAME_ID + " = ?";
-            String[] selectionArgs = {nombre};
+            /*if (id != "") {
+                String selection = Estructura_BBDD.COLUMN_NAME_NOMBRE + " = ?";
+                String[] selectionArgs = {id}
+            }*/
+            String selection = Estructura_BBDD.COLUMN_NAME_ID + " LIKE ? AND " + Estructura_BBDD.COLUMN_NAME_NOMBRE + " LIKE ? AND " + Estructura_BBDD.COLUMN_NAME_APELLIDO + " LIKE ?";
+            String[] selectionArgs = {id, nombre, apellido};
 
-            // How you want the results sorted in the resulting Cursor
             String sortOrder =
                     Estructura_BBDD.COLUMN_NAME_NOMBRE + " DESC";
 
@@ -49,15 +52,12 @@ public class ResultadosActivity extends AppCompatActivity {
                     sortOrder                                 // The sort order
             );
             if (c.getCount() > 0) {
-                c.moveToFirst();
-                String itemId = c.getString(
-                        c.getColumnIndexOrThrow(Estructura_BBDD.COLUMN_NAME_NOMBRE)
-                );
-                Toast.makeText(this, itemId, Toast.LENGTH_LONG).show();
-
                 ListView lista = (ListView) findViewById(R.id.lista);
-                int[]  to = new int[] { R.id.txtNombre };
-                SimpleCursorAdapter adaptador = new SimpleCursorAdapter(this, R.layout.activity_resultados, c, projection, to);
+
+                String[] from = new String[]{"nombre", "apellido"};
+                int[]  to = new int[] { R.id.txtNombre, R.id.txtApellido };
+
+                SimpleCursorAdapter adaptador = new SimpleCursorAdapter(this, R.layout.texto_lista, c, from, to);
                 lista.setAdapter(adaptador);
                 /*nombre.setText(c.getString(0));
                 apellido.setText(c.getString(1));*/
