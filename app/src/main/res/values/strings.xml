@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BaseDatos</string>
+    <string name="title_activity_resultados">ResultadosActivity</string>
 </resources>
