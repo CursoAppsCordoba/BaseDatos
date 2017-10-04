@@ -32,10 +32,6 @@ public class ResultadosActivity extends AppCompatActivity {
                     Estructura_BBDD.COLUMN_NAME_APELLIDO
             };
 
-            /*if (id != "") {
-                String selection = Estructura_BBDD.COLUMN_NAME_NOMBRE + " = ?";
-                String[] selectionArgs = {id}
-            }*/
             String selection = Estructura_BBDD.COLUMN_NAME_ID + " LIKE ? AND " + Estructura_BBDD.COLUMN_NAME_NOMBRE + " LIKE ? AND " + Estructura_BBDD.COLUMN_NAME_APELLIDO + " LIKE ?";
             String[] selectionArgs = {id, nombre, apellido};
 
